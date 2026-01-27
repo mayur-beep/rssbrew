@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  rssbrew:
+    image: yinanc/rssbrew:latest
+    # Setup DEPLOYMENT_URL (optional if deploy locally), OPENAI_API_KEY(optional), SECRET_KEY in .env
+    env_file:
+      - .env
+    environment:
+      - DEBUG=1
+      - CRON=*/5 * * * * # cron job for updating feeds
+      - TIME_ZONE=Europe/London # Refer to https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+      # Redis configuration (optional, defaults shown)
+      #- LOGGING_LEVEL=DEBUG
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - INTERNAL_PORT=${INTERNAL_PORT:-8000} # set INTERNAL_PORT in .env, otherwise default to 8000
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    ports:
+      - "8000:${INTERNAL_PORT:-8000}" # external:internal
+    restart: always
+
+  redis:
+    image: redis:latest
+    restart: always

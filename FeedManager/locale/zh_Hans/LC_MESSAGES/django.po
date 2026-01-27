@@ -1,0 +1,493 @@
+# Chinese (Simplified) translations for RSSBrew
+# Copyright (C) 2024
+# This file is distributed under the same license as the RSSBrew package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: RSSBrew 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-21 21:54+0000\n"
+"PO-Revision-Date: 2025-08-18 21:00+0000\n"
+"Last-Translator: RSSBrew Team\n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_Hans\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Update selected feeds"
+msgstr "更新选中的订阅源"
+
+#, python-format
+msgid "Feed update tasks have been queued for feed: %(feed_name)s"
+msgstr "订阅源 %(feed_name)s 的更新任务已加入队列"
+
+# Admin actions
+msgid "Clean old articles for selected feeds"
+msgstr "清理选中订阅源的旧文章"
+
+# Admin actions
+#, python-format
+msgid "Cleaned old articles from feed: %(feed_title)s"
+msgstr "已清理订阅源 %(feed_title)s 的旧文章"
+
+msgid "Export selected feeds as OPML"
+msgstr "导出选中的订阅源为 OPML"
+
+# Filter labels
+msgid "Has any original feed"
+msgstr "包含原始订阅源"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "No"
+msgstr "否"
+
+# Admin column headers
+msgid "Summarize per Update"
+msgstr "每次更新总结文章数"
+
+msgid "Digest/Entries"
+msgstr "摘要/条目"
+
+msgid "Original Feeds"
+msgstr "原始订阅源"
+
+msgid "Filter Settings"
+msgstr "过滤设置"
+
+msgid ""
+"Configure filter groups at the end. The logic operator determines how "
+"multiple filter groups are combined."
+msgstr "在页面最后配置过滤组。逻辑运算符决定多个过滤组如何组合。"
+
+# Admin fieldsets
+msgid "Summarization Options"
+msgstr "总结选项"
+
+msgid "Digest Options"
+msgstr "摘要选项"
+
+msgid "What to include in digest"
+msgstr "摘要包含内容"
+
+msgid "Subscribe Link"
+msgstr "订阅链接"
+
+msgid "Included in processed feeds"
+msgstr "包含在处理后订阅源中"
+
+msgid "Processed Feeds"
+msgstr "处理后订阅源"
+
+msgid "Authentication"
+msgstr "身份验证"
+
+msgid "Global AI Model Settings"
+msgstr "全局 AI 模型设置"
+
+msgid ""
+"These settings will be used as defaults for all feeds unless overridden "
+"individually"
+msgstr "这些设置将作为所有订阅源的默认值，除非单独覆盖"
+
+msgid "Feed Settings"
+msgstr "订阅设置"
+
+# App name
+msgid "Feed Manager"
+msgstr "订阅源管理"
+
+# Choice labels
+msgid "Other (specify below)"
+msgstr "其他（在下方指定）"
+
+msgid "None - Disable AI Features Globally"
+msgstr "无 - 全局禁用 AI 功能"
+
+msgid "Use Global Setting"
+msgstr "使用全局设置"
+
+# Field names
+msgid "Auth Code"
+msgstr "授权码"
+
+# Help texts
+msgid "Optional authentication code to access RSS feeds"
+msgstr "访问 RSS 订阅源的可选身份验证码"
+
+msgid "Global Summary Model"
+msgstr "全局总结模型"
+
+msgid ""
+"Master switch for AI summarization. When set to 'None', ALL AI summaries are "
+"disabled system-wide, regardless of individual feed settings. When set to a "
+"model, it enables AI features and serves as the default for feeds using 'Use "
+"Global Setting'."
+msgstr ""
+"AI 总结的总开关。设置为'无'时，将在全局禁用所有 AI 总结功能，无论单个订阅源的"
+"设置如何。设置为某个模型时，将启用 AI 功能并作为使用'使用全局设置'的订阅源的"
+"默认值。"
+
+msgid "Specify model name if 'Other' is selected above, e.g. 'grok-3' in xAI"
+msgstr "如果上面选择了\"其他\"，请指定模型名称，例如 xAI 中的 'grok-3'"
+
+msgid "Global Other Summary Model"
+msgstr "全局其他总结模型"
+
+msgid "Global Digest Model"
+msgstr "全局摘要模型"
+
+msgid "Global Other Digest Model"
+msgstr "全局其他摘要模型"
+
+msgid "Max Articles Per Processed Feed"
+msgstr "处理后订阅源的最大文章数"
+
+msgid ""
+"Maximum number of articles to include in each processed feed (does not "
+"affect the number of articles in the original feeds stored in database). "
+"Articles are sorted by publication date (newest first)."
+msgstr ""
+"每个处理后订阅源中包含的最大文章数（不会影响数据库中原始订阅源的文章数量）。"
+"文章按发布日期排序（最新的在前）。"
+
+# Model names
+msgid "App Setting"
+msgstr "应用设置"
+
+msgid "App Settings"
+msgstr "应用设置"
+
+msgid "RSS or Atom feed URL"
+msgstr "RSS 或 Atom 订阅源网址"
+
+msgid "URL"
+msgstr "网址"
+
+msgid "Display name for this feed"
+msgstr "此订阅源的显示名称"
+
+msgid "Title"
+msgstr "标题"
+
+msgid "Older articles will be removed when limit is reached"
+msgstr "达到限制时将删除较旧的文章"
+
+msgid "Max Articles to Keep"
+msgstr "最大保留文章数"
+
+msgid "Tags"
+msgstr "标签"
+
+msgid "Valid"
+msgstr "有效"
+
+msgid "Original Feed"
+msgstr "原始订阅源"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Tag"
+msgstr "标签"
+
+msgid "Last Modified"
+msgstr "最后修改时间"
+
+# Removed - no help text needed for tags field
+# Removed - no help text needed for valid field
+msgid "Original feeds to aggregate into this processed feed"
+msgstr "要聚合到此处理后订阅源的原始订阅源"
+
+msgid ""
+"Number of articles to summarize per update. All articles included in feed, "
+"set to 0 to disable summarization"
+msgstr ""
+"每次更新总结的文章数量。所有文章都包含在订阅源中，设置为 0 禁用总结功能"
+
+msgid "Articles to summarize per update"
+msgstr "每次更新总结文章数"
+
+msgid "Target language for summarization. Ignored if using custom prompt"
+msgstr "总结目标语言。使用自定义提示词时将忽略此设置"
+
+msgid "Summary Language"
+msgstr "总结目标语言"
+
+msgid "Custom Prompt"
+msgstr "自定义提示词"
+
+msgid ""
+"Override default summarization prompt. Can be used for translation or custom "
+"instructions"
+msgstr "覆盖默认总结提示词。可用于翻译或自定义指令"
+
+msgid "Article Title Translation"
+msgstr "文章标题翻译"
+
+msgid "Translate article titles to summary language"
+msgstr "将文章标题翻译为总结目标语言"
+
+msgid "Summary Model"
+msgstr "总结模型"
+
+msgid ""
+"AI model for summarization. Note: Requires global AI to be enabled in App "
+"Settings. If global AI is disabled (set to 'None'), this setting will have "
+"no effect."
+msgstr ""
+"用于总结的 AI 模型。注意：需要在应用设置中设置任意模型来启用 AI。如果全局 AI "
+"被禁用（设置为'无'），此设置将不起作用。"
+
+msgid "Other Model"
+msgstr "其他模型"
+
+msgid "Generate periodic digest of the feed"
+msgstr "定期生成订阅源摘要"
+
+msgid "Enable Digest"
+msgstr "启用摘要"
+
+msgid "Include individual entries in feed. Disable to only generate digest"
+msgstr "在订阅源中包含单独条目。禁用后仅生成摘要"
+
+msgid "Include Entries"
+msgstr "包含条目"
+
+msgid "Daily"
+msgstr "每日"
+
+msgid "Weekly"
+msgstr "每周"
+
+msgid "Digest Frequency"
+msgstr "摘要频率"
+
+# Removed - no help text needed for digest frequency field
+msgid "Last digest generation time. Modify to reset timer or force new digest"
+msgstr "上次摘要生成时间。修改此项可重置计时器或强制生成新摘要"
+
+msgid "Last Digest"
+msgstr "上次摘要时间"
+
+msgid "Include Table of Contents"
+msgstr "包含目录"
+
+# Removed - no help text needed for include_toc field
+msgid "Only works with default summarization (no custom prompt)"
+msgstr "仅适用于默认总结设置（无自定义提示词）"
+
+msgid "Include One Line Summary"
+msgstr "包含单行总结"
+
+msgid "Include Full Summary"
+msgstr "包含完整总结"
+
+msgid "Include Full Content"
+msgstr "包含文章内容"
+
+msgid "Use AI Digest"
+msgstr "使用 AI 摘要"
+
+# Removed - no help text needed for include_summary field
+# Removed - no help text needed for include_content field
+# Removed - no help text needed for use_ai_digest field
+msgid "Send FULL content of ALL articles during since last digest to AI for digest, in addtion to the default title, link, and summaries."
+msgstr "将自上次摘要以来所有文章的完整内容发送给 AI 生成摘要。默认只发送链接、标题和总结。"
+
+msgid "Send Full Article"
+msgstr "发送完整文章"
+
+msgid "Digest Model"
+msgstr "摘要模型"
+
+msgid ""
+"AI model for digest generation. Note: Requires global AI to be enabled in "
+"App Settings. If global AI is disabled (set to 'None'), this setting will "
+"have no effect."
+msgstr ""
+"用于摘要生成的 AI 模型。注意：需要在应用设置中选择任意模型来启用 AI。如果全"
+"局 AI 被禁用（设置为'无'），此设置将不起作用。"
+
+# Removed - no help text needed for digest_model field
+msgid ""
+"Specify OpenAI-compatible model if 'Other' is selected above, e.g. 'grok-3' "
+"in xAI"
+msgstr ""
+"如果上面选择了\"其他\"，请指定与 OpenAI 兼容的模型，例如 xAI 中的 'grok-3'"
+
+msgid "Other Digest Model"
+msgstr "其他摘要模型"
+
+msgid "Digest Prompt"
+msgstr "摘要提示词"
+
+msgid ""
+"Custom prompt for AI digest generation. Without this, only title, link and "
+"summary are included"
+msgstr "AI 摘要生成的自定义提示词。没有此项时，只包含标题、链接和总结"
+
+msgid "All"
+msgstr "所有"
+
+msgid "Any"
+msgstr "任一"
+
+msgid "None"
+msgstr "无一"
+
+msgid ""
+"Logic between filter groups for feed inclusion: match All/Any/None of the "
+"filter groups"
+msgstr "订阅源包含的过滤组间逻辑：匹配所有/任一/不符合任何过滤组"
+
+msgid "Logic Between Feed Filter Groups"
+msgstr "订阅源过滤组间逻辑"
+
+msgid ""
+"Logic between filter groups for summarization: match All/Any/None of the "
+"filter groups"
+msgstr "生成总结的过滤组间逻辑：匹配所有/任一/不符合任何过滤组"
+
+msgid "Logic Between Summary Filter Groups"
+msgstr "总结过滤组间逻辑"
+
+msgid "Enable case-sensitive filter matching. Default is case-insensitive"
+msgstr "启用区分大小写的过滤匹配。默认不区分大小写"
+
+msgid "Case Sensitive"
+msgstr "区分大小写"
+
+msgid "Processed Feed"
+msgstr "处理后订阅源"
+
+msgid "At least one of 'Enable Digest' or 'Include Entries' must be enabled."
+msgstr "必须至少启用\"启用摘要\"或\"包含条目\"中的一项。"
+
+msgid "Feed Filter"
+msgstr "订阅源过滤器"
+
+msgid "Summary Filter"
+msgstr "总结过滤器"
+
+msgid "Usage"
+msgstr "用途"
+
+msgid "Relational Operator"
+msgstr "关系运算符"
+
+msgid "Filter Group"
+msgstr "过滤器组"
+
+msgid "Filter Groups"
+msgstr "过滤器组"
+
+msgid "Content"
+msgstr "内容"
+
+msgid "Link"
+msgstr "链接"
+
+msgid "Title or content"
+msgstr "标题或内容"
+
+msgid "Contains"
+msgstr "包含"
+
+msgid "Does not contain"
+msgstr "不包含"
+
+msgid "Matches regex"
+msgstr "匹配正则表达式"
+
+msgid "Does not match regex"
+msgstr "不匹配正则表达式"
+
+msgid "Shorter than"
+msgstr "短于"
+
+msgid "Longer than"
+msgstr "长于"
+
+msgid "Field"
+msgstr "字段"
+
+msgid "Match Type"
+msgstr "匹配类型"
+
+msgid "Value"
+msgstr "值"
+
+msgid "Filter"
+msgstr "过滤器"
+
+msgid "Filters"
+msgstr "过滤器"
+
+msgid "Value must be a positive integer for length comparisons."
+msgstr "长度比较的值必须是正整数。"
+
+msgid "Value must be a positive integer greater than zero."
+msgstr "值必须是大于零的正整数。"
+
+msgid "Invalid regular expression."
+msgstr "无效的正则表达式。"
+
+msgid "Published Date"
+msgstr "发布日期"
+
+msgid "Summary"
+msgstr "总结"
+
+msgid "One Line Summary"
+msgstr "单行总结"
+
+msgid "Summarized"
+msgstr "已生成总结"
+
+msgid "Custom Prompt Used"
+msgstr "已使用自定义提示词"
+
+msgid "Article"
+msgstr "文章"
+
+msgid "Articles"
+msgstr "文章"
+
+msgid "Start Time"
+msgstr "开始时间"
+
+msgid "Created At"
+msgstr "创建时间"
+
+msgid "Digest"
+msgstr "摘要"
+
+msgid "Digests"
+msgstr "摘要"
+
+#, python-format
+msgid "Digest for %(feed_name)s from %(created_at)s"
+msgstr "%(feed_name)s 的摘要 - 创建于 %(created_at)s"
+
+#~ msgid ""
+#~ "Master switch for AI digest generation. When set to 'None', ALL AI "
+#~ "digests are disabled system-wide, regardless of individual feed settings. "
+#~ "When set to a model, it enables AI features and serves as the default for "
+#~ "feeds using 'Use Global Setting'."
+#~ msgstr ""
+#~ "AI 摘要生成的总开关。设置为'无'时，将在全局禁用所有 AI 摘要功能，无论单个"
+#~ "订阅源的设置如何。设置为某个模型时，将启用 AI 功能并作为使用'使用全局设"
+#~ "置'的订阅源的默认值。"
+
+#~ msgid "Performance Settings"
+#~ msgstr "性能设置"
+
+#~ msgid "Performance optimization settings for feed generation"
+#~ msgstr "订阅源生成的性能优化设置"
+
+#~ msgid "Model"
+#~ msgstr "模型"

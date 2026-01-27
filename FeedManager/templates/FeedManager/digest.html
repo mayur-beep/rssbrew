@@ -1,0 +1,22 @@
+{% extends "FeedManager/digest_base.html" %}
+
+{% block title %}
+Digest - {{ feed_name }}
+{% endblock %}
+
+{% block header %}
+{{ feed_name }} - Digest
+{% endblock %}
+
+{% block content %}
+  <div class="meta-info">
+    <span class="meta-info-text"><strong>Period:</strong> {{ date_range }}</span>
+    <a href="/feeds/{{ feed_name }}/digest/{% if auth_key %}?key={{ auth_key }}{% endif %}"
+       class="nav-button">
+      📚 All Digests
+    </a>
+  </div>
+  <div class="digest-content">
+    {{ digest.content|safe }}
+  </div>
+{% endblock %}
