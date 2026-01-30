@@ -122,14 +122,52 @@ def clean_txt_and_truncate(query, model, clean_bool=True):
         return cleaned_article
 
 
+def get_entry_link(entry):
+    """
+    Extract link from a feedparser entry, handling various RSS formats.
+
+    Some feeds use entry.link (string), others use entry.links (list of dicts).
+    This function tries entry.link first (what Twitter/RSSHub uses), then
+    falls back to entry.links for feedgen-produced RSS and Atom feeds.
+    """
+    # Try direct link attribute first (most common, used by Twitter/RSSHub)
+    if hasattr(entry, 'link') and entry.link:
+        return entry.link
+
+    # Try links list (Atom feeds, some RSS 2.0, feedgen-produced feeds)
+    if hasattr(entry, 'links') and entry.links:
+        for link_obj in entry.links:
+            if isinstance(link_obj, dict):
+                href = link_obj.get('href')
+                rel = link_obj.get('rel', 'alternate')
+                if href and rel in ('alternate', ''):
+                    return href
+            elif hasattr(link_obj, 'href'):
+                return link_obj.href
+        # Fallback: return first link if no alternate found
+        first_link = entry.links[0]
+        if isinstance(first_link, dict):
+            return first_link.get('href')
+        elif hasattr(first_link, 'href'):
+            return first_link.href
+
+    # Try id/guid as fallback (some feeds use URL as id)
+    if hasattr(entry, 'id') and entry.id and entry.id.startswith('http'):
+        return entry.id
+
+    return None
+
+
 def generate_untitled(entry):
     """Generate a title for an entry if it doesn't have one."""
     if hasattr(entry, "title") and entry.title:
         return entry.title
     if hasattr(entry, "article") and entry.article:
         return entry.article[:50]
-    if hasattr(entry, "link") and entry.link:
-        return entry.link
+    # Use get_entry_link for robust link extraction
+    link = get_entry_link(entry)
+    if link:
+        return link
     return "Untitled"
 
 

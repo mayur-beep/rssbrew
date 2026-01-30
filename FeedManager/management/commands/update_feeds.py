@@ -11,7 +11,7 @@ import requests
 from fake_useragent import UserAgent
 
 from FeedManager.models import Article, ProcessedFeed
-from FeedManager.utils import clean_url, generate_summary, generate_untitled, passes_filters
+from FeedManager.utils import clean_url, generate_summary, generate_untitled, get_entry_link, passes_filters
 
 logger = logging.getLogger("feed_logger")
 
@@ -186,9 +186,15 @@ class Command(BaseCommand):
                 logger.error(f"Failed to process entry: {e!s}")
 
     def process_entry(self, entry, feed, original_feed):
+        # Extract link using robust helper that handles various RSS formats
+        entry_link = get_entry_link(entry)
+        if not entry_link:
+            logger.warning(f"  Skipping entry without link: {getattr(entry, 'title', 'Unknown title')}")
+            return
+
         # 先检查 filter 再检查数据库
         if passes_filters(entry, feed, "feed_filter"):
-            existing_article = Article.objects.filter(link=clean_url(entry.link), original_feed=original_feed).first()
+            existing_article = Article.objects.filter(link=clean_url(entry_link), original_feed=original_feed).first()
             logger.debug(
                 f"  Already in db: {entry.title}" if existing_article else f"  Processing new article: {entry.title}"
             )
@@ -197,7 +203,7 @@ class Command(BaseCommand):
                 article = Article(
                     original_feed=original_feed,
                     title=generate_untitled(entry),
-                    link=clean_url(entry.link),
+                    link=clean_url(entry_link),
                     published_date=parse_date_fallback(entry),
                     content=(
                         entry.content[0].value
