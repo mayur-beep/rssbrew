@@ -18,6 +18,7 @@ from django.core.management.utils import get_random_secret_key
 from django.utils.translation import gettext_lazy as _
 
 from huey import RedisHuey
+from redis.connection import BlockingConnectionPool
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -257,27 +258,50 @@ LOGGING = {
 }
 
 # Redis configuration - supports both REDIS_URL (Railway) and individual env vars (Docker)
+# Use BlockingConnectionPool to properly manage connections and avoid "Too many connections" error
 REDIS_URL = os.environ.get("REDIS_URL")
+
+# Connection pool configuration
+# max_connections=50: allow up to 50 concurrent connections
+# timeout=30: wait up to 30 seconds for a connection from the pool
+REDIS_POOL_KWARGS = {
+    "max_connections": 50,
+    "timeout": 30,
+}
+
 if REDIS_URL:
     # Parse Railway's REDIS_URL format: redis://default:password@host:port
     parsed_redis = urlparse(REDIS_URL)
-    HUEY = RedisHuey(
-        "rssbrew-huey",
+
+    # Create a connection pool with proper configuration
+    redis_pool = BlockingConnectionPool(
         host=parsed_redis.hostname or "localhost",
         port=parsed_redis.port or 6379,
         password=parsed_redis.password,
         db=int(os.environ.get("REDIS_DB", 0)),
+        **REDIS_POOL_KWARGS,
+    )
+
+    HUEY = RedisHuey(
+        "rssbrew-huey",
+        connection_pool=redis_pool,
         result_store=True,
         events=True,
         store_none=False,
     )
 else:
     # Fallback to individual env vars (for Docker Compose)
-    HUEY = RedisHuey(
-        "rssbrew-huey",
+    redis_pool = BlockingConnectionPool(
         host=os.environ.get("REDIS_HOST", "redis"),
         port=int(os.environ.get("REDIS_PORT", 6379)),
+        password=os.environ.get("REDIS_PASSWORD"),
         db=int(os.environ.get("REDIS_DB", 0)),
+        **REDIS_POOL_KWARGS,
+    )
+
+    HUEY = RedisHuey(
+        "rssbrew-huey",
+        connection_pool=redis_pool,
         result_store=True,
         events=True,
         store_none=False,
