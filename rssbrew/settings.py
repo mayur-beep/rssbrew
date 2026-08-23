@@ -18,10 +18,8 @@ from django.core.management.utils import get_random_secret_key
 from django.utils.translation import gettext_lazy as _
 
 from huey import RedisHuey
-from redis.connection import BlockingConnectionPool
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Build paths inside the project like this: BASE_DIR / 'subdir'.\nBASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -258,53 +256,36 @@ LOGGING = {
 }
 
 # Redis configuration - supports both REDIS_URL (Railway) and individual env vars (Docker)
-# Use BlockingConnectionPool to properly manage connections and avoid "Too many connections" error
+# Use connection_params to properly configure Redis connections
 REDIS_URL = os.environ.get("REDIS_URL")
 
-# Connection pool configuration
+# Connection pool configuration for Redis
 # max_connections=50: allow up to 50 concurrent connections
-# timeout=30: wait up to 30 seconds for a connection from the pool
-REDIS_POOL_KWARGS = {
+REDIS_CONNECTION_KWARGS = {
     "max_connections": 50,
-    "timeout": 30,
 }
 
 if REDIS_URL:
-    # Parse Railway's REDIS_URL format: redis://default:password@host:port
-    parsed_redis = urlparse(REDIS_URL)
-
-    # Create a connection pool with proper configuration
-    redis_pool = BlockingConnectionPool(
-        host=parsed_redis.hostname or "localhost",
-        port=parsed_redis.port or 6379,
-        password=parsed_redis.password,
-        db=int(os.environ.get("REDIS_DB", 0)),
-        **REDIS_POOL_KWARGS,
-    )
-
+    # Railway provides REDIS_URL; use it directly with Huey
     HUEY = RedisHuey(
         "rssbrew-huey",
-        connection_pool=redis_pool,
+        url=REDIS_URL,
         result_store=True,
         events=True,
         store_none=False,
     )
 else:
     # Fallback to individual env vars (for Docker Compose)
-    redis_pool = BlockingConnectionPool(
+    HUEY = RedisHuey(
+        "rssbrew-huey",
         host=os.environ.get("REDIS_HOST", "redis"),
         port=int(os.environ.get("REDIS_PORT", 6379)),
         password=os.environ.get("REDIS_PASSWORD"),
         db=int(os.environ.get("REDIS_DB", 0)),
-        **REDIS_POOL_KWARGS,
-    )
-
-    HUEY = RedisHuey(
-        "rssbrew-huey",
-        connection_pool=redis_pool,
         result_store=True,
         events=True,
         store_none=False,
     )
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
+
