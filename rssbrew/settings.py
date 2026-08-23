@@ -256,23 +256,18 @@ LOGGING = {
 }
 
 # Redis configuration - supports both REDIS_URL (Railway) and individual env vars (Docker)
-# Use connection_params to properly configure Redis connections
 REDIS_URL = os.environ.get("REDIS_URL")
 
-# Connection pool configuration for Redis
-# max_connections=50: allow up to 50 concurrent connections
-REDIS_CONNECTION_KWARGS = {
-    "max_connections": 50,
-}
-
 if REDIS_URL:
-    # Railway provides REDIS_URL; use it directly with Huey
+    # Railway provides REDIS_URL; parse it and use connection_params
+    parsed_redis = urlparse(REDIS_URL)
     HUEY = RedisHuey(
         "rssbrew-huey",
-        url=REDIS_URL,
-        result_store=True,
-        events=True,
-        store_none=False,
+        connection_pool=None,  # Don't pass connection_pool
+        host=parsed_redis.hostname or "localhost",
+        port=parsed_redis.port or 6379,
+        password=parsed_redis.password,
+        db=int(os.environ.get("REDIS_DB", 0)),
     )
 else:
     # Fallback to individual env vars (for Docker Compose)
@@ -282,9 +277,6 @@ else:
         port=int(os.environ.get("REDIS_PORT", 6379)),
         password=os.environ.get("REDIS_PASSWORD"),
         db=int(os.environ.get("REDIS_DB", 0)),
-        result_store=True,
-        events=True,
-        store_none=False,
     )
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
